@@ -93,11 +93,4 @@ fi
 
 source "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/.env"
 export PATH=$HOME/dotfiles/bin:$PATH
-export PATH=$HOME/repos/zenbook-duo-2024-ux8406ma-linux:$PATH
 
-
-alias pj='nix-shell -p appimage-run --run "appimage-run /home/user/repos/PlotJuggler/PlotJuggler-x86_64.AppImage"'
-
-if command -v zoxide &> /dev/null; then
-    eval "$(zoxide init bash)"
-fi
