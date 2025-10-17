@@ -23,4 +23,5 @@ vim.opt.cursorline = false
 vim.opt.guicursor = ''
 vim.opt.laststatus = 0
 vim.opt.termguicolors = true
+vim.opt.fixeol = false
 vim.cmd('set cursorline cursorlineopt=number')
