@@ -22,8 +22,8 @@
           pkgs = import nixpkgs { inherit system; };
         in
         {
-          neovim = pkgs.callPackage ./nix/neovim.nix { };
-          q-cli = pkgs.callPackage ./nix/q.nix { };
+          avim = pkgs.callPackage ./nix/avim.nix { };
+          #q-cli = pkgs.callPackage ./nix/q.nix { };
         }
       );
     };
