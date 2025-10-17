@@ -17,7 +17,7 @@
   lua-language-server
 }:
 let
-  packageName = "edvard-neovim";
+  packageName = "andreas-neovim";
 
   startPlugins = [
     vimPlugins.plenary-nvim
@@ -56,8 +56,8 @@ let
   '';
 in
 symlinkJoin {
-  meta.mainProgram = "nvim"; # for appimage bundling
-  name = "nvim";
+  meta.mainProgram = "avim"; # for appimage bundling
+  name = "avim";
   paths = [ neovim-unwrapped ];
   nativeBuildInputs = [ makeWrapper ];
   postBuild = ''
@@ -80,7 +80,7 @@ symlinkJoin {
       --add-flags '${./init.lua}' \
       --add-flags '--cmd' \
       --add-flags "'set packpath^=${packpath} | set runtimepath^=${packpath}'" \
-      --set-default NVIM_APPNAME nvim-custom
+      --set-default NVIM_APPNAME avim
   '';
 
   passthru = {
