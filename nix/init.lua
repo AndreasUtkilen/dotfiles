@@ -65,22 +65,22 @@ vim.api.nvim_create_autocmd("FileType", {
     end)
   end
 })
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "gitcommit",
-    callback = function()
-        local buf = vim.api.nvim_get_current_buf()
-        local promt = "Create a conventional commit message with one succint line, then bullet points. This should be the last text, only in plaintext no markdown and straight to the point technical"
-        local handle = io.popen('git diff --staged | q ' .. promt)
-        local result = handle:read("*a")
-        handle:close()
-
-        local lines = {} -- split output into lines
-        for line in result:gmatch("[^\r\n]+") do table.insert(lines, line) end
-
-        vim.api.nvim_buf_set_lines(buf, 0, 0, false, lines)
-        vim.api.nvim_win_set_cursor(0, {#lines + 1, 0})
-    end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = "gitcommit",
+--     callback = function()
+--         local buf = vim.api.nvim_get_current_buf()
+--         local promt = "Create a conventional commit message with one succint line, then bullet points. This should be the last text, only in plaintext no markdown and straight to the point technical"
+--         local handle = io.popen('git diff --staged | q ' .. promt)
+--         local result = handle:read("*a")
+--         handle:close()
+--
+--         local lines = {} -- split output into lines
+--         for line in result:gmatch("[^\r\n]+") do table.insert(lines, line) end
+--
+--         vim.api.nvim_buf_set_lines(buf, 0, 0, false, lines)
+--         vim.api.nvim_win_set_cursor(0, {#lines + 1, 0})
+--     end,
+-- })
 
 -- vim.keymap.set("n", "<leader>a", '"+y<CR>')
 
