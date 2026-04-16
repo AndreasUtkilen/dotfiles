@@ -90,7 +90,18 @@ if command -v ip &> /dev/null; then
     }
 fi
 
+gc() {
+  local branch
+  branch=$(
+    git for-each-ref --format='%(refname:short)' refs/heads \
+    | fzf --height=40% --reverse --border \
+        --prompt="Switch branch > " \
+        --preview 'git log --oneline --graph --decorate --color=always {} | head -30'
+  ) || return
+
+  [ -n "$branch" ] && git switch "$branch"
+}
 
 source "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/.env"
 export PATH=$HOME/dotfiles/bin:$PATH
-
+export PATH=$HOME/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin:$PATH

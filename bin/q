@@ -2,27 +2,27 @@
 
 
 # Combine arguments and stdin
-input="$*"
-if [ ! -t 0 ]; then
-    stdin=$(cat)
-    input="$input $stdin"
-fi
-
-# Trim leading/trailing whitespace
-input="$(echo "$input" | xargs)"
-
-# Exit if empty
-[ -z "$input" ] && { echo 'No input provided <|*_*|>'; exit 0; }
-
-json_input=$(printf "%s" "$input" | jq -Rs .)
-# echo "$json_input"
-
-model='qwen/qwen3-32b'
-
-system_prompt='You are going to reply succinctly'
-response=$(curl -s -X POST "https://api.groq.com/openai/v1/chat/completions" \
-     -H "Authorization: Bearer $GROQ_API_KEY" \
-     -H "Content-Type: application/json" \
-     -d "{\"messages\": [ {\"role\": \"system\", \"content\": \"$system_prompt\"}, {\"role\": \"user\", \"content\": $json_input} ], \"model\": \"$model\"}")
-# echo "$response"
-echo "$response" | jq -r '.choices[0].message.content'
+# input="$*"
+# if [ ! -t 0 ]; then
+#     stdin=$(cat)
+#     input="$input $stdin"
+# fi
+#
+# # Trim leading/trailing whitespace
+# input="$(echo "$input" | xargs)"
+#
+# # Exit if empty
+# [ -z "$input" ] && { echo 'No input provided <|*_*|>'; exit 0; }
+#
+# json_input=$(printf "%s" "$input" | jq -Rs .)
+# # echo "$json_input"
+#
+# model='qwen/qwen3-32b'
+#
+# system_prompt='You are going to reply succinctly'
+# response=$(curl -s -X POST "https://api.groq.com/openai/v1/chat/completions" \
+#      -H "Authorization: Bearer $GROQ_API_KEY" \
+#      -H "Content-Type: application/json" \
+#      -d "{\"messages\": [ {\"role\": \"system\", \"content\": \"$system_prompt\"}, {\"role\": \"user\", \"content\": $json_input} ], \"model\": \"$model\"}")
+# # echo "$response"
+# echo "$response" | jq -r '.choices[0].message.content'

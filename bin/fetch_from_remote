@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+[ -z "$1" ] && { echo "Usage: $0 <host>"; exit 1; }
+
+REMOTE=$1
+RSYNC_PROG() { nix-shell -p rsync --run "rsync -avh --progress \"$1\" \"$2\""; }
+
+file_list=$(ssh "$REMOTE" 'mktemp')
+ssh -t "$REMOTE" "nix-shell -p nnn --run 'nnn -p $file_list ~/monorepo/valkyrie/build/deb-packages/'"
+mapfile -t FILES < <(ssh $REMOTE "cat '$file_list'; rm -f '$file_list'")
+
+
+for f in "${FILES[@]}"; do
+    RSYNC_PROG "$REMOTE:$f" .
+done
